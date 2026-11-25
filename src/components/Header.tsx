@@ -50,14 +50,6 @@ export function Header({ search, onSearch, onMenu }: HeaderProps) {
 
   return (
     <>
-      <div className="mobile-statusbar" aria-hidden="true">
-        <span>{dashboardDefaults.mobileStatusTime}</span>
-        <span className="mobile-system-icons">
-          <Signal size={15} />
-          <Wifi size={16} />
-          <BatteryFull size={19} />
-        </span>
-      </div>
       <header className="topbar">
         <button
           className="icon-button mobile-menu"
