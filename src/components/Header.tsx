@@ -1,16 +1,13 @@
-import { useEffect, useRef, useState } from "react";
 import {
-  BatteryFull,
   Bell,
   BriefcaseBusiness,
   ChevronDown,
   Menu,
   Moon,
   Search,
-  Signal,
   Sun,
-  Wifi,
 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { dashboardDefaults } from "../data/dashboard";
 import { useClickOutside } from "../hooks/useClickOutside";
 import { formatPersianNumber } from "../utils/format";
