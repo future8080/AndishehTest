@@ -491,6 +491,15 @@ input[type='checkbox'] { width: 14px; height: 14px; margin: 0; accent-color: #42
 .page-footer { display: flex; justify-content: space-between; padding: 17px 3px 2px; color: #a3acb8; font-size: 9px; }
 .page-footer i { color: #ed7a84; font-style: normal; }
 .modal-backdrop { position: fixed; z-index: 60; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(25, 35, 52, .43); backdrop-filter: blur(3px); }
+.delete-confirm-backdrop { z-index: 70; }
+.delete-confirm-dialog { width: min(100%, 390px); padding: 25px 24px 21px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); box-shadow: 0 25px 70px rgba(25, 35, 52, .24); text-align: center; }
+.delete-confirm-icon { display: grid; width: 52px; height: 52px; margin: 0 auto 15px; place-items: center; border-radius: 50%; background: #fff0f0; color: #df5c66; }
+.delete-confirm-dialog h2 { margin: 0; color: var(--text); font-size: 15px; font-weight: 700; }
+.delete-confirm-dialog p { margin: 8px 0 21px; color: var(--muted); font-size: 11px; line-height: 1.9; }
+.delete-confirm-actions { display: flex; justify-content: center; gap: 9px; }
+.delete-confirm-actions .secondary-button, .delete-confirm-button { min-width: 100px; min-height: 37px; }
+.delete-confirm-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #df5c66; border-radius: 8px; background: #df5c66; color: #fff; font-size: 10px; font-weight: 600; }
+.delete-confirm-button:hover { border-color: #c84753; background: #c84753; }
 .request-modal { width: min(100%, 550px); overflow: hidden; border: 1px solid var(--border); border-radius: 15px; background: var(--surface); box-shadow: 0 25px 70px rgba(25, 35, 52, .24); }
 .modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 21px 23px 17px; border-bottom: 1px solid var(--border); }
 .modal-header h2 { margin: 0; color: var(--text); font-size: 16px; font-weight: 700; }
@@ -516,6 +525,7 @@ input[type='checkbox'] { width: 14px; height: 14px; margin: 0; accent-color: #42
 [data-theme='dark'] .selection-bar { background: #303c4b; color: #a9caff; }
 [data-theme='dark'] .selection-bar .bulk-delete-button { color: #f29aa2; }
 [data-theme='dark'] .selection-bar .clear-selection-button { color: #c1ccda; }
+[data-theme='dark'] .delete-confirm-icon { background: #50363d; color: #f29aa2; }
 [data-theme='dark'] td { border-bottom-color: var(--border); }
 [data-theme='dark'] th, [data-theme='dark'] td, [data-theme='dark'] .status-legend-row { color: #c3cedc; }
 [data-theme='dark'] .employee-name, [data-theme='dark'] .amount-cell, [data-theme='dark'] .stat-value, [data-theme='dark'] .status-legend-row strong { color: var(--text); }

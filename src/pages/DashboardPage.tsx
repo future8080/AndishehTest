@@ -84,16 +84,14 @@ export function DashboardPage() {
     setModal(null);
   }
 
-  function deleteRequest(request: LoanRequest) {
-    if (!window.confirm(`درخواست ${request.employee} حذف شود؟`)) return;
-    setRequests((current) => current.filter((item) => item.id !== request.id));
-    toast.success("درخواست حذف شد.");
-  }
-
   function deleteRequests(requestIds: number[]) {
     const selectedIds = new Set(requestIds);
     setRequests((current) => current.filter((request) => !selectedIds.has(request.id)));
-    toast.success(`${formatPersianNumber(requestIds.length)} درخواست حذف شد.`);
+    toast.success(
+      requestIds.length === 1
+        ? "درخواست حذف شد."
+        : `${formatPersianNumber(requestIds.length)} درخواست حذف شد.`,
+    );
   }
 
   function exportReport() {
@@ -221,7 +219,6 @@ export function DashboardPage() {
                 onCreate={() => setModal({ mode: "create" })}
                 onView={(request) => setModal({ mode: "view", request })}
                 onEdit={(request) => setModal({ mode: "edit", request })}
-                onDelete={deleteRequest}
                 onDeleteMany={deleteRequests}
               />
             </div>

@@ -11,6 +11,7 @@ import {
   SlidersHorizontal,
   Trash2,
 } from "lucide-react";
+import { DeleteConfirmModal } from "./DeleteConfirmModal";
 import { requestFormOptions } from "../data/requests";
 import {
   allStatusesLabel,
@@ -31,7 +32,6 @@ interface RequestsTableProps {
   onCreate: () => void;
   onView: (request: LoanRequest) => void;
   onEdit: (request: LoanRequest) => void;
-  onDelete: (request: LoanRequest) => void;
   onDeleteMany: (requestIds: number[]) => void;
 }
 
@@ -47,7 +47,6 @@ export function RequestsTable({
   onCreate,
   onView,
   onEdit,
-  onDelete,
   onDeleteMany,
 }: RequestsTableProps) {
   const [page, setPage] = useState(1);
@@ -56,6 +55,7 @@ export function RequestsTable({
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [actionMenuId, setActionMenuId] = useState<number | null>(null);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
+  const [pendingDelete, setPendingDelete] = useState<LoanRequest[] | null>(null);
   const filterRef = useClickOutside<HTMLDivElement>(() => setFiltersOpen(false));
   const rowMenuRef = useClickOutside<HTMLDivElement>(() => setActionMenuId(null));
   const pageCount = Math.max(1, Math.ceil(requests.length / pageSize));
@@ -82,11 +82,26 @@ export function RequestsTable({
     setFiltersOpen(false);
   }
 
-  function deleteSelected() {
-    const selectedCount = selectedIds.length;
-    if (!window.confirm(`حذف ${formatPersianNumber(selectedCount)} درخواست انتخاب‌شده؟`)) return;
-    onDeleteMany(selectedIds);
-    setSelectedIds([]);
+  function openBulkDeleteConfirmation() {
+    const selectedRequests = requests.filter((request) => selectedIds.includes(request.id));
+    if (selectedRequests.length > 0) setPendingDelete(selectedRequests);
+  }
+
+  function confirmDelete() {
+    if (!pendingDelete) return;
+    const idsToDelete = pendingDelete.map((request) => request.id);
+    onDeleteMany(idsToDelete);
+    setSelectedIds((ids) => ids.filter((id) => !idsToDelete.includes(id)));
+    setPendingDelete(null);
+  }
+
+  function cancelDelete() {
+    setPendingDelete(null);
+  }
+
+  function requestDelete(request: LoanRequest) {
+    setPendingDelete([request]);
+    setActionMenuId(null);
   }
 
   return (
@@ -149,7 +164,7 @@ export function RequestsTable({
         <div className="selection-bar">
           <span>{formatPersianNumber(selectedIds.length)} مورد انتخاب شده</span>
           <div className="selection-actions">
-            <button className="bulk-delete-button" onClick={deleteSelected}>
+            <button className="bulk-delete-button" onClick={openBulkDeleteConfirmation}>
               <Trash2 size={14} />
               حذف انتخاب‌شده‌ها
             </button>
@@ -307,8 +322,7 @@ export function RequestsTable({
                           <button
                             className="danger-action"
                             onClick={() => {
-                              onDelete(request);
-                              setActionMenuId(null);
+                              requestDelete(request);
                             }}
                           >
                             <Trash2 size={14} />
@@ -386,6 +400,14 @@ export function RequestsTable({
           </button>
         </div>
       </footer>
+      {pendingDelete && (
+        <DeleteConfirmModal
+          count={pendingDelete.length}
+          description={pendingDelete.length === 1 ? pendingDelete[0].employee : undefined}
+          onCancel={cancelDelete}
+          onConfirm={confirmDelete}
+        />
+      )}
     </section>
   );
 }
