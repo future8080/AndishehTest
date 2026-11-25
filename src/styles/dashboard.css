@@ -434,8 +434,11 @@
 .filter-menu strong { display: block; padding: 6px 9px 7px; color: #98a2b1; font-size: 9px; font-weight: 550; }
 .filter-menu button.chosen { background: #edf4ff; color: #3677e8; font-weight: 650; }
 .results-count { color: #8d97a7; font-size: 9px; }
-.selection-bar { display: flex; align-items: center; gap: 9px; padding: 8px 18px; background: #f3f7ff; color: #3978e7; font-size: 10px; }
-.selection-bar button { padding: 0; border: 0; background: transparent; color: #718198; font-size: 10px; text-decoration: underline; }
+.selection-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 18px; background: #f3f7ff; color: #3978e7; font-size: 10px; }
+.selection-actions { display: flex; align-items: center; gap: 12px; }
+.selection-bar button { padding: 0; border: 0; background: transparent; color: #718198; font-size: 10px; }
+.selection-bar .bulk-delete-button { display: inline-flex; align-items: center; gap: 5px; color: #d85e69; font-weight: 600; }
+.selection-bar .clear-selection-button { text-decoration: underline; }
 .table-scroll { width: 100%; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; text-align: right; white-space: nowrap; }
 thead { background: #f8f9fc; }
@@ -511,6 +514,8 @@ input[type='checkbox'] { width: 14px; height: 14px; margin: 0; accent-color: #42
 [data-theme='dark'] .table-search, [data-theme='dark'] .date-button, [data-theme='dark'] .secondary-button { color: #c1ccda; }
 [data-theme='dark'] .filter-active, [data-theme='dark'] .filter-menu button.chosen { background: #37465a; color: #a9caff; }
 [data-theme='dark'] .selection-bar { background: #303c4b; color: #a9caff; }
+[data-theme='dark'] .selection-bar .bulk-delete-button { color: #f29aa2; }
+[data-theme='dark'] .selection-bar .clear-selection-button { color: #c1ccda; }
 [data-theme='dark'] td { border-bottom-color: var(--border); }
 [data-theme='dark'] th, [data-theme='dark'] td, [data-theme='dark'] .status-legend-row { color: #c3cedc; }
 [data-theme='dark'] .employee-name, [data-theme='dark'] .amount-cell, [data-theme='dark'] .stat-value, [data-theme='dark'] .status-legend-row strong { color: var(--text); }

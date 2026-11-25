@@ -21,6 +21,7 @@ import type {
 } from "../types";
 import { downloadRequestsCsv } from "../utils/exportRequests";
 import { getInitials } from "../utils/employee";
+import { formatPersianNumber } from "../utils/format";
 import { filterLoanRequests } from "../utils/requests";
 import "../styles/dashboard.css";
 
@@ -89,6 +90,12 @@ export function DashboardPage() {
     toast.success("درخواست حذف شد.");
   }
 
+  function deleteRequests(requestIds: number[]) {
+    const selectedIds = new Set(requestIds);
+    setRequests((current) => current.filter((request) => !selectedIds.has(request.id)));
+    toast.success(`${formatPersianNumber(requestIds.length)} درخواست حذف شد.`);
+  }
+
   function exportReport() {
     downloadRequestsCsv(filteredRequests);
     toast.success("گزارش درخواست‌ها دانلود شد.");
@@ -141,10 +148,6 @@ export function DashboardPage() {
         <div className="dashboard-content">
           <div className="page-heading">
             <div className="heading-copy">
-              <div className="eyebrow">
-                <span className="eyebrow-dot" />
-                پنل مدیریت منابع انسانی
-              </div>
               <h1>داشبورد</h1>
               <p>درخواست‌های وام کارکنان را مدیریت و پیگیری کنید.</p>
             </div>
@@ -219,6 +222,7 @@ export function DashboardPage() {
                 onView={(request) => setModal({ mode: "view", request })}
                 onEdit={(request) => setModal({ mode: "edit", request })}
                 onDelete={deleteRequest}
+                onDeleteMany={deleteRequests}
               />
             </div>
           )}
