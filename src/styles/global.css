@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;450;500;550;600;650;700;750&display=swap');
+
+:root {
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  color: #202b3d;
+  background: #f5f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  --surface: #fff;
+  --canvas: #f5f7fb;
+  --text: #202b3d;
+  --muted: #8a94a5;
+  --border: #edf0f5;
+  --blue: #4285f4;
+  --shadow: 0 3px 14px rgba(32, 54, 91, .035);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid rgba(66, 133, 244, .24);
+  outline-offset: 2px;
+}
+::selection { color: #1d5bc0; background: #ddebff; }
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --surface: #354254;
+  --canvas: #2a3544;
+  --text: #edf2fa;
+  --muted: #b1bdcc;
+  --border: #465469;
+  --blue: #83b1ff;
+  --shadow: 0 5px 18px rgba(8, 14, 24, .14);
+}
